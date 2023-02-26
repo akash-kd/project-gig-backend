@@ -5,9 +5,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import { connect } from './utils/db.js'
 import goalRouter from './resources/goal/goal.router.js'
-import userRouter from './resources/user/user.router.js'
-import langRouter from './resources/lang/lang.router.js'
-import noteRouter from './resources/note/note.router.js'
+import notesRouter from './resources/notes/notes.router.js'
 import { config } from 'dotenv'
 
 
@@ -22,9 +20,7 @@ app.use(json())
 app.use(morgan('dev'))
 app.use(cors())
 app.options('*', cors())
-app.use('/user', userRouter)
-app.use('/lang',langRouter)
-app.use('/note',noteRouter) 
+app.use('/notes',notesRouter) 
 app.use('/goal',goalRouter)
 
 app.get('/', (req, res) => {

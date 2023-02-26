@@ -1,7 +1,7 @@
-import { Goal } from "./goal.model.js"
+
+import { Goal } from './goal.model.js'
 
 export const addGoal = async (req, res) => {
-    console.log(req.body)
     if (req.body.createdBy && req.body.goal) {
         const goal = new Goal(req.body)
         try {
@@ -18,9 +18,8 @@ export const addGoal = async (req, res) => {
 }
 
 export const removeGoal = async (req, res) => {
-    console.log(req.body)
     if (req.body.createdBy && req.body._id) {
-        const goal = Goal.findByIdAndDelete(req.body._id);
+        const goal = await Goal.findByIdAndDelete(req.body._id)
         try {
             res.status(200).send(goal)
         } catch (error) {
@@ -34,9 +33,8 @@ export const removeGoal = async (req, res) => {
 }
 
 export const updateGoal = async (req, res) => {
-    console.log(req.body)
     if (req.body.createdBy && req.body._id && req.body.goal) {
-        const goal = await Goal.findByIdAndUpdate({_id:req.body._id}, { goal: req.body.goal }, { new: true });
+        const goal = await Goal.findByIdAndUpdate({_id:req.body._id}, { goal: req.body.goal }, { new: true })
         try {
             res.status(200).send(goal)
         } catch (error) {
@@ -50,9 +48,8 @@ export const updateGoal = async (req, res) => {
 }
 
 export const doneGoal = async (req, res) => {
-    console.log(req.body)
     if (req.body.createdBy && req.body._id) {
-        const goal = await Goal.findByIdAndUpdate({ _id: req.body._id }, { done: true }, { new: true });
+        const goal = await Goal.findByIdAndUpdate({ _id: req.body._id }, { done: true }, { new: true })
         try {
             res.status(200).send(goal)
         } catch (error) {
@@ -67,11 +64,10 @@ export const doneGoal = async (req, res) => {
 
 export const allGoals = async (req, res) => {
     if (req.body.createdBy) {
-        console.log(req.body.createdBy)
-        const goals = Goal.find({createdBy:req.body.createdBy});
+        const goals = Goal.find({createdBy:req.body.createdBy})
         goals
             .then(data => res.status(200).send(data))
-            .catch(err => res.status(404).send(err).end());
+            .catch(err => res.status(404).send(err).end())
     } else {
         res.status(400).send({
             message: 'Certain Parameter are missing'

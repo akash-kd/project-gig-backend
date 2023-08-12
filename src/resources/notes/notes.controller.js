@@ -1,6 +1,5 @@
 import { Notes } from './notes.model.js'
 
-
 export const addNotes = async (req,res) => {
     if (req.body.createdBy && req.body.content) { 
         const notes = await Notes(req.body)

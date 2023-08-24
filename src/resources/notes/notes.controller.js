@@ -9,6 +9,8 @@ export const addNotes = async (req,res) => {
         } catch (error) {
             res.status(404).send(error).end()
         }
+    } else {
+        res.status(402).json({message: 'Invalid Formatting'})
     }
 }
 
@@ -20,6 +22,8 @@ export const getOneNotes = async (req,res) => {
         } catch (error) {
             res.status(404).send(error).end()
         }
+    } else {
+        res.status(402).json({ message: 'Invalid Formatting' }).end()
     }
 }
 
@@ -31,6 +35,8 @@ export const getAllNotes = async (req,res) => {
         } catch (error) {
             res.status(404).send(error).end()
         }
+    } else {
+        res.status(402).json({ message: 'Invalid Formatting' }).end()
     }
 }
 
@@ -44,8 +50,6 @@ export const updateNotes = async (req, res) => {
             res.status(404).send(error).end()
         }
     } else {
-        res.status(400).send({
-            message: 'Certain Parameter are missing'
-        }).end() 
+        res.status(402).json({ message: 'Invalid Formatting' }).end()
     }
 }
